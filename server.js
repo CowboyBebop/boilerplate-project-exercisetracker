@@ -19,6 +19,9 @@ app.get('/', (req, res) => {
 });
 
 
+const apiRouter = require('./routes/api');
+app.use('/api/exercise', apiRouter);
+
 // Not found middleware
 app.use((req, res, next) => {
   return next({status: 404, message: 'not found'})
