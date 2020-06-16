@@ -47,7 +47,7 @@ router.post("/new-user", async (req, res, next) => {
         }
     } 
     
-}
+})
 
 //get an array of all users by getting api/exercise/users d
 //with the same info as when creating a user.
