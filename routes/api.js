@@ -65,3 +65,4 @@ router.post("/new-user", async (req, res, next) => {
 //(Date format yyyy-mm-dd, limit = int)
 //router.get
 
+module.exports = router
