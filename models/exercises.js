@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const { exists } = require('./users');
 const Schema = mongoose.Schema;
 
-Exercise = Schema({
+Exercises = Schema({
     description:{
         type: String,
         required: true,
@@ -46,3 +46,4 @@ Exercises.pre('save', function(next) {
     });
   });
   
+module.exports = mongoose.model('Exercises', Exercises);
