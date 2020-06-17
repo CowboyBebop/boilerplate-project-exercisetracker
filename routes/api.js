@@ -35,7 +35,7 @@ router.post("/new-user", async (req, res, next) => {
 
     console.log("kek?")
     try {
-        await user.save()
+        let savedUser = await user.save();
         res.json({username: savedUser.username, _id: savedUser._id})
     } catch (err) {
         if (err.code == 11000) {
@@ -67,4 +67,4 @@ router.post("/new-user", async (req, res, next) => {
 //(Date format yyyy-mm-dd, limit = int)
 //router.get
 
-module.exports = router
+module.exports = route
