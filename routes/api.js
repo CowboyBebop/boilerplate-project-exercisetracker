@@ -17,38 +17,20 @@ const router = require('express').Router();
 // will return an object with username and _id.
 router.post("/new-user", async (req, res, next) => {
     
+
     let newUser = req.body;
-    console.log(newUser);
-
-    let user = await Users.findOne({ username: newUser });
-
-    if (user) res.send('Username already taken');
-
-    else {
-        newUser = Users({ username: newUser });
-        await newUser.save();
-        res.json({ username: newUser.username, _id: newUser._id })
-    }
-    return next(err);
-    
-/*
-    const user = new Users(req.body);
-
     try {
+        let user = await Users.findOne({ username: newUser });
+        if (user) return next({status: 400, message: 'Username already taken'})
+
+        const user = new Users(newUser);
         let savedUser = await user.save();
-        res.json({username: savedUser.username, _id: savedUser._id})
+        return res.json({username: savedUser.username, _id: savedUser._id})
+
     } catch (err) {
-        if (err.code == 11000) {
-            // uniqueness error (no custom message)
-            return next({status: 400, message: 'Username already taken'})
-        }
-        else
-        {
-            console.log(err);
-            return next(err);
-        }
+        console.log(err);
+        return next(err);
     } 
-  */  
 })
 
 //get an array of all users by getting api/exercise/users d
