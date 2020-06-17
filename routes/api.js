@@ -18,12 +18,12 @@ const router = require('express').Router();
 router.post("/new-user", async (req, res, next) => {
     
 
-    let newUser = req.body;
+    let username = req.body;
     try {
-        let user = await Users.findOne({ username: newUser });
+        let user = await Users.findOne({ username: username });
         if (user) return next({status: 400, message: 'Username already taken'})
 
-        const user = new Users(newUser);
+        let newUser = new Users({ username: username });
         let savedUser = await user.save();
         return res.json({username: savedUser.username, _id: savedUser._id})
 
