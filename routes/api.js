@@ -20,12 +20,13 @@ router.post("/new-user", async (req, res, next) => {
 
     let username = req.body;
     try {
+
         let user = await Users.findOne({ username: username });
         if (user) return next({status: 400, message: 'Username already taken'})
 
         let newUser = new Users({ username: username });
-        let savedUser = await newUser.save();
-        return res.json({username: savedUser.username, _id: savedUser._id})
+        await newUser.save();
+        return res.json({username: newUser.username, _id: newUser._id})
 
     } catch (err) {
         console.log(err);
