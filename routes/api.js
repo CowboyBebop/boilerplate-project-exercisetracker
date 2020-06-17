@@ -3,21 +3,10 @@ const Exercises = require('../models/exercises');
 
 const router = require('express').Router();
 
-/*
-
-
-
-
-
-*/
-
-
-
 //create a user by posting form data username to /api/exercise/new-user
 // will return an object with username and _id.
+/*
 router.post("/new-user", async (req, res, next) => {
-    
-
     let newUsername = req.body;
     try {
 
@@ -33,7 +22,30 @@ router.post("/new-user", async (req, res, next) => {
         return next(err);
     } 
 })
+*/
 
+router.post('/new-user', (req, res, next) => {
+    const user = new Users(req.body);
+    user.save((err, savedUser) => {
+      if(err) {
+        if(err.code == 11000) {
+          // uniqueness error (no custom message)
+          return next({
+            status: 400,
+            message: 'Username already taken'
+          })
+        } else {
+          return next(err)
+        }
+      }
+  
+      res.json({
+        username: savedUser.username,
+        _id: savedUser._id
+      })
+    })
+})
+  
 //get an array of all users by getting api/exercise/users d
 //with the same info as when creating a user.
 //router.get()
