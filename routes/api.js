@@ -16,7 +16,7 @@ const router = require('express').Router();
 //create a user by posting form data username to /api/exercise/new-user
 // will return an object with username and _id.
 router.post("/new-user", async (req, res, next) => {
-    /*
+    
     let newUser = req.body;
     console.log(newUser);
 
@@ -29,11 +29,11 @@ router.post("/new-user", async (req, res, next) => {
         await newUser.save();
         res.json({ username: newUser.username, _id: newUser._id })
     }
-    */
-
+    return next(err);
+    
+/*
     const user = new Users(req.body);
 
-    console.log("kek?")
     try {
         let savedUser = await user.save();
         res.json({username: savedUser.username, _id: savedUser._id})
@@ -48,7 +48,7 @@ router.post("/new-user", async (req, res, next) => {
             return next(err);
         }
     } 
-    
+  */  
 })
 
 //get an array of all users by getting api/exercise/users d
