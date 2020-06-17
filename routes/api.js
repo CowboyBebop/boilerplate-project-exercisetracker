@@ -5,7 +5,7 @@ const router = require('express').Router();
 
 //create a user by posting form data username to /api/exercise/new-user
 // will return an object with username and _id.
-/*
+
 router.post("/new-user", async (req, res, next) => {
     let newUsername = req.body;
     try {
@@ -14,6 +14,7 @@ router.post("/new-user", async (req, res, next) => {
         if (user) return next({status: 400, message: 'Username already taken'})
 
         let newUser = new Users({ username: newUsername });
+        console.log("the error is here");
         await newUser.save();
         return res.json({username: newUser.username, _id: newUser._id})
 
@@ -22,8 +23,8 @@ router.post("/new-user", async (req, res, next) => {
         return next(err);
     } 
 })
-*/
 
+/*
 router.post('/new-user', (req, res, next) => {
     const user = new Users(req.body);
     user.save((err, savedUser) => {
@@ -45,7 +46,7 @@ router.post('/new-user', (req, res, next) => {
       })
     })
 })
-  
+  */
 //get an array of all users by getting api/exercise/users d
 //with the same info as when creating a user.
 //router.get()
