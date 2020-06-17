@@ -44,6 +44,7 @@ router.post("/new-user", async (req, res, next) => {
         }
         else
         {
+            console.log(err);
             return next(err);
         }
     } 
