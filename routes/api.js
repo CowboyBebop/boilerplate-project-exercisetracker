@@ -7,7 +7,7 @@ const router = require('express').Router();
 // will return an object with username and _id.
 
 router.post("/new-user", async (req, res, next) => {
-    let newUsername = req.body;
+    let newUsername = req.body.username;
     try {
 
         let user = await Users.findOne({ username: newUsername });
