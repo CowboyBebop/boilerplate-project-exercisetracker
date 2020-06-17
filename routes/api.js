@@ -33,6 +33,7 @@ router.post("/new-user", async (req, res, next) => {
 
     const user = new Users(req.body);
 
+    console.log("kek?")
     try {
         await user.save()
         res.json({username: savedUser.username, _id: savedUser._id})
