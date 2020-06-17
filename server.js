@@ -9,7 +9,7 @@ mongoose.Promise = global.Promise;
 
 mongoose.set('useUnifiedTopology', true);
 mongoose.set('useCreateIndex', true);
-mongoose.openUri(process.env.MONGO_URI)
+mongoose.connect(process.env.MONGO_URI)
 
 app.use(cors())
 
