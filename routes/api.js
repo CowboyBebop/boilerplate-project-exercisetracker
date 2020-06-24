@@ -49,10 +49,7 @@ router.post("/add",async (req, res, next) => {
   let date = req.body.date;
 
   try {
-
     const exercise = new Exercises(req.body)
-
-
     savedEx = await exercise.save();
 
     let ex = savedEx.toObject();
@@ -75,7 +72,7 @@ router.post("/add",async (req, res, next) => {
 //Return the user object with added array log and count (total exercise count).
 //retrieve part of the log of any user by also passing along optional parameters of from & to or limit.
 //(Date format yyyy-mm-dd, limit = int)
-/*
+
 router.get("/log", async (req, res, next) => {
 
   let userIdQuery = req.params.userId;
@@ -86,12 +83,21 @@ router.get("/log", async (req, res, next) => {
   try {
     Users.findOne();
 
-    
+    let foundExercises = Exercises.find({userId:userIdQuery});
+
+    return res.json({
+      "_id": savedEx.userId,
+      "username":savedEx.username,
+      "count":savedEx.username,
+      "log": foundExercises
+    })
+
+
   } catch (err) {
     console.log(err);
     return next(err);
   }
 
 });
-*/
+
 module.exports = router
