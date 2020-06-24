@@ -61,14 +61,17 @@ router.post("/add",async (req, res, next) => {
     });
     */
 
-    savedExercise = await exercise.save();
+    savedEx = await exercise.save();
 
-    let ex = savedExercise.toObject();
+    let ex = savedEx.toObject();
 
-    delete ex._id;
-    delete ex.__v;
-
-    return res.json(ex)
+    return res.json({
+      "_id": savedEx._id,
+      "username":savedEx.username,
+      "date": savedEx.date,
+      "duration": savedEx.duration,
+      "description": savedEx.description
+    })
 
   } catch (err) {
     console.log(err);
