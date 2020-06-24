@@ -85,6 +85,8 @@ router.get("/log", async (req, res, next) => {
 
     let foundExercises = await Exercises.find({userId:userIdQuery});
 
+    console.log("kek?: " foundUser.userId);
+
     return res.json({
       "_id": foundUser.userId,
       "username":foundUser.username,
