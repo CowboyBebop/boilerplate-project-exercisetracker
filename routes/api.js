@@ -49,16 +49,21 @@ router.post("/add",async (req, res, next) => {
   let date = req.body.date;
 
   try {
+
+    const exercise = new Exercises(req.body)
+
+    /*
     let newExercise = Exercises({
       description: description,
       duration: duration,
       date: date,
       userId: userId
     });
+    */
 
     savedExercise = await newExercise.save();
 
-    return res.json({userid: userId, ...newExercise})
+    return res.json({exercise})
 
   } catch (err) {
     console.log(err);
