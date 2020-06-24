@@ -43,10 +43,10 @@ router.get("/users",async (req, res, next) => {
 //Returned will be the user object with also with the exercise fields added.
 router.post("/add",async (req, res, next) => {
 
-  let userId = req.params.userId;
-  let description = req.params.description;
-  let duration = req.params.duration;
-  let date = req.params.date;
+  let userId = req.body.userId;
+  let description = req.body.description;
+  let duration = req.body.duration;
+  let date = req.body.date;
 
   try {
     let newExercise = Exercises({
@@ -88,5 +88,5 @@ router.get("/log", async (req, res, next) => {
   }
 
 });
-*/
+
 module.exports = router
