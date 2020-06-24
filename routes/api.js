@@ -63,7 +63,9 @@ router.post("/add",async (req, res, next) => {
 
     savedExercise = await exercise.save();
 
-    return res.json({...savedExercise})
+    let ex = savedExercise.toObject();
+    
+    return res.json(ex)
 
   } catch (err) {
     console.log(err);
