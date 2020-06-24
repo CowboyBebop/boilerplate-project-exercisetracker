@@ -64,7 +64,10 @@ router.post("/add",async (req, res, next) => {
     savedExercise = await exercise.save();
 
     let ex = savedExercise.toObject();
-    
+
+    delete ex._id;
+    delete ex.__v;
+
     return res.json(ex)
 
   } catch (err) {
