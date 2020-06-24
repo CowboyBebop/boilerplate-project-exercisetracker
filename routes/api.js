@@ -89,7 +89,7 @@ router.get("/log", async (req, res, next) => {
       "_id": savedEx.userId,
       "username":savedEx.username,
       "count":savedEx.username,
-      "log": foundExercises
+      "log": [...foundExercises]
     })
 
 
