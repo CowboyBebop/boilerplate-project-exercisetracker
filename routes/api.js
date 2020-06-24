@@ -66,7 +66,7 @@ router.post("/add",async (req, res, next) => {
     let ex = savedEx.toObject();
 
     return res.json({
-      "_id": savedEx._id,
+      "_id": savedEx.userId,
       "username":savedEx.username,
       "date":(new Date(savedEx.date)).toDateString(),
       "duration": savedEx.duration,
