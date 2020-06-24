@@ -81,7 +81,7 @@ router.get("/log", async (req, res, next) => {
   let limit = req.params.limit;
 
   try {
-    foundUser = Users.findOne({userId:userIdQuery});
+    let foundUser = await Users.findOne({userId:userIdQuery});
 
     let foundExercises = await Exercises.find({userId:userIdQuery});
 
