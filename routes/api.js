@@ -41,13 +41,12 @@ router.get("/users",async (req, res, next) => {
 //description, duration, and optionally date to /api/exercise/add.
 //If no date supplied it will use current date. 
 //Returned will be the user object with also with the exercise fields added.
-/*
 router.post("/add",async (req, res, next) => {
 
-  let userId = req.body.userId;
-  let description = req.body.description;
-  let duration = req.body.duration;
-  let date = req.body.date;
+  let userId = req.params.userId;
+  let description = req.params.description;
+  let duration = req.params.duration;
+  let date = req.params.date;
 
   try {
     let newExercise = Exercises({
@@ -65,14 +64,13 @@ router.post("/add",async (req, res, next) => {
     console.log(err);
     return next(err);
   }
-
-
 });
 
 //retrieve a full exercise log of any user by getting /api/exercise/log with a parameter of userId(_id).
 //Return the user object with added array log and count (total exercise count).
 //retrieve part of the log of any user by also passing along optional parameters of from & to or limit.
 //(Date format yyyy-mm-dd, limit = int)
+/*
 router.get("/log", async (req, res, next) => {
 
   let userIdQuery = req.params.userId;
