@@ -63,7 +63,7 @@ router.post("/add",async (req, res, next) => {
 
     savedExercise = await exercise.save();
 
-    return res.json({savedExercise})
+    return res.json({...savedExercise})
 
   } catch (err) {
     console.log(err);
