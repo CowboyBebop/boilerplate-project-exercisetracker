@@ -1,5 +1,6 @@
 const Users = require('../models/users');
 const Exercises = require('../models/exercises');
+const users = require('../models/users');
 
 const router = require('express').Router();
 
@@ -9,12 +10,10 @@ const router = require('express').Router();
 router.post("/new-user", async (req, res, next) => {
     let newUsername = req.body.username;
     try {
-
         let user = await Users.findOne({ username: newUsername });
         if (user) return next({status: 400, message: 'Username already taken'})
 
         let newUser = new Users({ username: newUsername });
-        console.log("the error is here");
         await newUser.save();
         return res.json({username: newUser.username, _id: newUser._id})
 
@@ -24,43 +23,72 @@ router.post("/new-user", async (req, res, next) => {
     } 
 })
 
-/*
-router.post('/new-user', (req, res, next) => {
-    const user = new Users(req.body);
-    user.save((err, savedUser) => {
-      if(err) {
-        if(err.code == 11000) {
-          // uniqueness error (no custom message)
-          return next({
-            status: 400,
-            message: 'Username already taken'
-          })
-        } else {
-          return next(err)
-        }
-      }
-  
-      res.json({
-        username: savedUser.username,
-        _id: savedUser._id
-      })
-    })
-})
-  */
 //get an array of all users by getting api/exercise/users d
 //with the same info as when creating a user.
-//router.get()
+router.get("/users",async (req, res, next) => {
+  try {
+    let allUsers = await Users.find({});
+    res.json(allUsers);
+  } catch (err) {
+    console.log(err);
+    return next(err);
+  }  
+});
+
+
 
 //add an exercise to any user by posting form data userId(_id),
 //description, duration, and optionally date to /api/exercise/add.
 //If no date supplied it will use current date. 
 //Returned will be the user object with also with the exercise fields added.
-//router.post
+/*
+router.post("/add",async (req, res, next) => {
+
+  let userId = req.body.userId;
+  let description = req.body.description;
+  let duration = req.body.duration;
+  let date = req.body.date;
+
+  try {
+    let newExercise = Exercises({
+      description: description,
+      duration: duration,
+      date: date,
+      userId: userId
+    });
+
+    savedExercise = await newExercise.save();
+
+    return res.json({userid: userId, ...newExercise})
+
+  } catch (err) {
+    console.log(err);
+    return next(err);
+  }
+
+
+});
 
 //retrieve a full exercise log of any user by getting /api/exercise/log with a parameter of userId(_id).
-//Return will be the user object with added array log and count (total exercise count).
+//Return the user object with added array log and count (total exercise count).
 //retrieve part of the log of any user by also passing along optional parameters of from & to or limit.
 //(Date format yyyy-mm-dd, limit = int)
-//router.get
+router.get("/log", async (req, res, next) => {
 
+  let userIdQuery = req.params.userId;
+  let dateFrom = req.params.from;
+  let dateTo = req.params.to;
+  let limit = req.params.limit;
+
+  try {
+    Users.findOne();
+
+    
+  } catch (err) {
+    console.log(err);
+    return next(err);
+  }
+
+});
+*/
 module.exports = router
