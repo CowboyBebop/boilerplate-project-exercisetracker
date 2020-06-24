@@ -52,14 +52,6 @@ router.post("/add",async (req, res, next) => {
 
     const exercise = new Exercises(req.body)
 
-    /*
-    let newExercise = Exercises({
-      description: description,
-      duration: duration,
-      date: date,
-      userId: userId
-    });
-    */
 
     savedEx = await exercise.save();
 
