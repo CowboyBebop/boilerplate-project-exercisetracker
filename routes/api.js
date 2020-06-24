@@ -68,7 +68,7 @@ router.post("/add",async (req, res, next) => {
     return res.json({
       "_id": savedEx._id,
       "username":savedEx.username,
-      "date": savedEx.date,
+      "date":(new Date(savedEx.date)).toDateString(),
       "duration": savedEx.duration,
       "description": savedEx.description
     })
