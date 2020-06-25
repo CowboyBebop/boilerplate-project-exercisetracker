@@ -97,6 +97,9 @@ router.get("/log", async (req, res, next) => {
       .limit(parseInt(limit));
 
     //filter using the other given parameters
+    
+    console.log(foundUser);
+    console.log(foundUser._id);
 
     return res.json({
       _id: foundUser._id,
