@@ -76,12 +76,9 @@ router.post("/add",async (req, res, next) => {
 router.get("/log", async (req, res, next) => {
 
   let userIdQuery = req.params.userId;
-  let from = req.params.from;
-  let to = req.params.to;
+  let dateTo = new Date(req.params.to);
+  let dateFrom = new Date(req.params.from);
   let limit = req.params.limit;
-
-  let dateFrom = new Date(from);
-  let dateTo = new Date(to);
 
   try {
     //Find the user and their associated exercises
@@ -90,8 +87,8 @@ router.get("/log", async (req, res, next) => {
     let foundExercises = await Exercises.find({
       userId: userIdQuery,
       date: {
-        $lte: dateTo,
-        $gte: dateFrom
+        $lte: dateTo != 'Invalid Date' ? dateTo.toISOString() : Date.now() ,
+        $gte: dateFrom != 'Invalid Date' ? dateFrom.toISOString() : 0
       }}, {
         __v: 0,
         _id: 0
