@@ -76,22 +76,40 @@ router.post("/add",async (req, res, next) => {
 router.get("/log", async (req, res, next) => {
 
   let userIdQuery = req.params.userId;
-  let dateFrom = req.params.from;
-  let dateTo = req.params.to;
+  let from = req.params.from;
+  let to = req.params.to;
   let limit = req.params.limit;
 
+  let dateFrom = new Date(from);
+  let dateTo = new Date(to);
+
   try {
-    let foundUser = await Users.findOne({userId:userIdQuery});
+    //Find the user and their associated exercises
+    let foundUser = await Users.findById(userIdQuery);
 
-    let foundExercises = await Exercises.find({username: foundUser.username});
+    let foundExercises = await Exercises.find({
+      userId: req.query.userId,
+      date: {
+        $lte: dateTo.toISOString(),
+        $gte: dateFrom.toISOString()
+      }}, {
+        __v: 0,
+        _id: 0
+      })
+      .sort('-date')
+      .limit(parseInt(limit));
 
-    console.log(foundUser.username);
+    //filter using the other given parameters
 
     return res.json({
       "_id": foundUser._id,
       "username":foundUser.username,
-      "count":1,
-      "log": [foundExercises]
+      "count":foundExercises.length,
+      log: exercises.map(e => ({
+        description : foundExercises.description,
+        duration : foundExercises.duration,
+        date: foundExercises.date.toDateString()
+      })
     })
 
 
