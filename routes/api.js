@@ -75,10 +75,10 @@ router.post("/add",async (req, res, next) => {
 
 router.get("/log", async (req, res, next) => {
 
-  let userIdQuery = req.params.userId;
-  let dateTo = new Date(req.params.to);
-  let dateFrom = new Date(req.params.from);
-  let limit = req.params.limit;
+  let userIdQuery = req.query.userId;
+  let dateTo = new Date(req.query.to);
+  let dateFrom = new Date(req.query.from);
+  let limit = req.query.limit;
 
   try {
     //Find the user and their associated exercises
