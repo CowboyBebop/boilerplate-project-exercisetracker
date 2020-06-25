@@ -88,10 +88,10 @@ router.get("/log", async (req, res, next) => {
     let foundUser = await Users.findById(userIdQuery);
 
     let foundExercises = await Exercises.find({
-      userId: req.query.userId,
+      userId: userIdQuery,
       date: {
-        $lte: dateTo.toISOString(),
-        $gte: dateFrom.toISOString()
+        $lte: dateTo,
+        $gte: dateFrom
       }}, {
         __v: 0,
         _id: 0
@@ -102,13 +102,13 @@ router.get("/log", async (req, res, next) => {
     //filter using the other given parameters
 
     return res.json({
-      "_id": foundUser._id,
-      "username":foundUser.username,
-      "count":foundExercises.length,
-      log: exercises.map(e => ({
-        description : foundExercises.description,
-        duration : foundExercises.duration,
-        date: foundExercises.date.toDateString()
+      _id: foundUser._id,
+      username: foundUser.username,
+      count: foundExercises.length,
+      log: foundExercises.map(e => ({
+        description : e.description,
+        duration : e.duration,
+        date: e.date.toDateString()
         })
       )}
     );
