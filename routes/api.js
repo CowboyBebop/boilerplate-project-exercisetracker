@@ -109,8 +109,9 @@ router.get("/log", async (req, res, next) => {
         description : foundExercises.description,
         duration : foundExercises.duration,
         date: foundExercises.date.toDateString()
-      })
-    })
+        })
+      )}
+    );
 
 
   } catch (err) {
